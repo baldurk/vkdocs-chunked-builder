@@ -1,27 +1,35 @@
-// thanks to https://stackoverflow.com/a/7719185/4070143
+/*! loadJS: load a JS file asynchronously. [c]2014 @scottjehl, Filament Group, Inc. (Based on http://goo.gl/REQGQ by Paul Irish). Licensed MIT */
+(function( w ){
+	var loadJS = function( src, cb, ordered ){
+		"use strict";
+		var tmp;
+		var ref = w.document.getElementsByTagName( "script" )[ 0 ];
+		var script = w.document.createElement( "script" );
 
-//this function will work cross-browser for loading scripts asynchronously
-function loadScript(src, callback)
-{
-  var s,
-    r,
-    t;
-  r = false;
-  s = document.createElement('script');
-  s.type = 'text/javascript';
-  s.src = src;
-  s.onload = s.onreadystatechange = function() {
-    //console.log( this.readyState ); //uncomment this line to see which ready states are called.
-    if ( !r && (!this.readyState || this.readyState == 'complete') )
-    {
-      r = true;
-      callback();
-    }
-  };
-  t = document.getElementsByTagName('script')[0];
-  t.parentNode.insertBefore(s, t);
-}
+		if (typeof(cb) === 'boolean') {
+			tmp = ordered;
+			ordered = cb;
+			cb = tmp;
+		}
 
+		script.src = src;
+		script.async = !ordered;
+		ref.parentNode.insertBefore( script, ref );
+
+		if (cb && typeof(cb) === "function") {
+			script.onload = cb;
+		}
+		return script;
+	};
+	// commonjs
+	if( typeof module !== "undefined" ){
+		module.exports = loadJS;
+	}
+	else {
+		w.loadJS = loadJS;
+	}
+}( typeof global !== "undefined" ? global : this ));
+/*! end loadJS */
 
 var searchengine = undefined;
 
@@ -154,14 +162,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
   results = document.getElementById('results');
   searchbox = document.getElementById('searchbox');
 
-  loadScript("lunr.js", function() {
-    loadScript(searchindexurl, function() {
+  loadJS("lunr.js", function() {
+    loadJS(searchindexurl, function() {
       searchengine = lunr.Index.load(searchindex);
 
       searchbox.value = '';
       searchbox.disabled = false;
       searchbox.addEventListener('keydown', searchKeyDown, false);
       searchbox.addEventListener('input', searchInput, false);
-    });
-  });
+    }, true);
+  }, true);
 });

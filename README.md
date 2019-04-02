@@ -20,3 +20,9 @@ $> mkdir source
 $> wget https://www.khronos.org/registry/vulkan/specs/1.1-extensions/html/vkspec.html -O source/vkspec.html
 $> docker run --rm -v $(pwd)/source:/source -v /path/to/output:/output vkdocs-chunked-builder
 ```
+
+## License
+
+This repository is licensed under the MIT license.
+
+Uses portions of code from loadJS. Copyright 2014 @scottjehl, Filament Group, Inc. Licensed MIT.
