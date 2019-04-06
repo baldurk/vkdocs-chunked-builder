@@ -23,6 +23,6 @@ $> docker run --rm -v $(pwd)/source:/source -v /path/to/output:/output vkdocs-ch
 
 ## License
 
-This repository is licensed under the MIT license.
+This repository is licensed under the Apache 2.0 license.
 
 Uses portions of code from loadJS. Copyright 2014 @scottjehl, Filament Group, Inc. Licensed MIT.
