@@ -5,7 +5,7 @@ set -x
 cp /source/vkspec.html /work
 
 # Patch to add Preamble TOC entry and extra js/css for search & other improvements
-patch vkspec.html custom.patch
+patch -u -p1 vkspec.html custom.patch
 
 # Generate the chunked spec
 ros dynamic-space-size=4000 -Q -L sbcl-bin asciidoctor-chunker/roswell/asciidoctor-chunker.ros vkspec.html -o /output/html/
