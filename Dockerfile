@@ -14,8 +14,8 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # Download and install roswell
-RUN wget https://github.com/roswell/roswell/releases/download/v18.10.10.95/roswell_18.10.10.95-1_amd64.deb
-RUN dpkg -i roswell_18.10.10.95-1_amd64.deb
+RUN wget https://github.com/roswell/roswell/releases/download/v20.06.14.107/roswell_20.06.14.107-1_amd64.deb
+RUN dpkg -i roswell_20.06.14.107-1_amd64.deb
 
 # Make output directory and scratch directory
 RUN mkdir /output
